@@ -45,25 +45,28 @@ export default function Home() {
     }
   };
 
-  // 배너 데이터: 1번(50억 50교회 마중물), 2번(새성전), 3번(환영과 푸른하늘)
+  // 배너 데이터: 1번(새성전), 2번(환영과 푸른하늘), 3번(50억 50교회 마중물)
   const banners = [
-    { 
-      id: 1, 
-      imageUrl: '/banner_project50.jpg?v=centered60', 
-      link: '/news/286',
-      title: '50억 50교회 회복 마중물 프로젝트'
-    },
     { 
       id: 2, 
       imageUrl: '/banner1.jpg?v=new_church', 
       link: '/about',
-      title: '영안장로교회 새 성전 비전' 
+      title: '영안장로교회 새 성전 비전',
+      hasOverlay: false
     },
     { 
       id: 3, 
       imageUrl: '/banner2.jpg?v=sky2', 
       link: '/about/greeting',
-      title: '환영합니다' 
+      title: '환영합니다',
+      hasOverlay: true
+    },
+    { 
+      id: 1, 
+      imageUrl: '/banner_project50.jpg?v=centered60', 
+      link: '/news/286',
+      title: '50억 50교회 회복 마중물 프로젝트',
+      hasOverlay: false
     },
   ];
 
@@ -89,8 +92,8 @@ export default function Home() {
                   className="block w-full h-full bg-cover bg-center cursor-pointer"
                   style={{ backgroundImage: `url(${banner.imageUrl})` }}
                 >
-                  {/* 배너 위에 글씨: 3번 배너에 환영합니다 텍스트 및 양쪽 VISION, 2026 표어 (40% 확대) 출력 */}
-                  {banner.id === 3 && (
+                  {/* 배너 위에 글씨: 환영합니다 배너에 텍스트 및 양쪽 VISION, 2026 표어 (40% 확대) 출력 */}
+                  {banner.hasOverlay && (
                     <div className="absolute inset-0 bg-black/45 flex items-center justify-between px-4 sm:px-8 lg:px-14">
                       
                       {/* 왼쪽: VISION (하나님사랑, 교회사랑, 이웃사랑) - 40% 대형화 */}
