@@ -1,7 +1,11 @@
+'use client';
+
 import React from 'react';
 import { MapPin, Phone, Printer, Navigation, Bus, Train } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function DirectionsPage() {
+  const { t } = useLanguage();
   const address = "서울특별시 중랑구 신내로15길 179";
   
   return (
@@ -10,9 +14,11 @@ export default function DirectionsPage() {
         
         {/* 타이틀 */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-4">찾아오시는 길</h1>
+          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-4">
+            {t('찾아오시는 길', 'Directions & Location')}
+          </h1>
           <p className="text-xl text-gray-500">
-            영안장로교회로 오시는 길을 상세히 안내해 드립니다.
+            {t('영안장로교회로 오시는 길을 상세히 안내해 드립니다.', 'Detailed directions to Youngan Presbyterian Church.')}
           </p>
         </div>
 
@@ -24,9 +30,13 @@ export default function DirectionsPage() {
                 <MapPin className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1">교회 주소</h3>
+                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1">
+                  {t('교회 주소', 'Church Address')}
+                </h3>
                 <p className="text-lg font-bold text-gray-900">{address}</p>
-                <p className="text-sm text-gray-500 mt-1">(구 주소: 서울특별시 중랑구 신내동 662)</p>
+                <p className="text-sm text-gray-500 mt-1">
+                  {t('(구 주소: 서울특별시 중랑구 신내동 662)', '(Old: 662 Shinnae-dong, Jungnang-gu, Seoul)')}
+                </p>
               </div>
             </div>
 
@@ -35,7 +45,9 @@ export default function DirectionsPage() {
                 <Phone className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1">대표 전화 / 팩스</h3>
+                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1">
+                  {t('대표 전화 / 팩스', 'Phone / Fax')}
+                </h3>
                 <p className="text-lg font-bold text-gray-900">Tel: 02-3423-0451</p>
                 <p className="text-sm text-gray-500 mt-1">Fax: 02-3423-0458</p>
               </div>
@@ -49,7 +61,7 @@ export default function DirectionsPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold rounded-lg transition-colors text-sm"
             >
-              <Navigation className="w-4 h-4" /> 카카오맵으로 보기
+              <Navigation className="w-4 h-4" /> {t('카카오맵으로 보기', 'View on Kakao Map')}
             </a>
             <a 
               href={`https://map.naver.com/v5/search/${encodeURIComponent(address)}`} 
@@ -57,17 +69,19 @@ export default function DirectionsPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#03C75A] hover:bg-[#02b350] text-white font-bold rounded-lg transition-colors text-sm"
             >
-              <Navigation className="w-4 h-4" /> 네이버지도로 보기
+              <Navigation className="w-4 h-4" /> {t('네이버지도로 보기', 'View on Naver Map')}
             </a>
           </div>
         </div>
 
-        {/* 약도 이미지 카드 (업스케일 및 확대) */}
+        {/* 약도 이미지 카드 */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-10 text-center">
           <div className="flex items-center justify-between mb-6 border-b pb-3 text-left">
-            <h2 className="text-xl font-bold text-gray-900">약도 안내</h2>
+            <h2 className="text-xl font-bold text-gray-900">
+              {t('약도 안내', 'Campus Map')}
+            </h2>
             <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">
-              클릭 시 고해상도 확대
+              {t('고해상도 지도', 'High-Resolution')}
             </span>
           </div>
           <div className="rounded-xl overflow-hidden border border-gray-100 bg-gray-50 inline-block w-full">
@@ -81,7 +95,9 @@ export default function DirectionsPage() {
 
         {/* 대중교통 안내 */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-6 border-b pb-3">대중교통 안내</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-6 border-b pb-3">
+            {t('대중교통 안내', 'Public Transportation')}
+          </h2>
           
           <div className="space-y-6">
             <div className="flex items-start gap-4">
@@ -89,9 +105,14 @@ export default function DirectionsPage() {
                 <Train className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-gray-900 mb-1">지하철 이용 시</h3>
+                <h3 className="text-base font-bold text-gray-900 mb-1">
+                  {t('지하철 이용 시', 'By Subway')}
+                </h3>
                 <p className="text-gray-700 leading-relaxed break-keep">
-                  <strong>6호선 봉화산역</strong> 하차 후 도보 또는 마을버스 이용
+                  {t(
+                    '6호선 봉화산역 하차 후 도보 또는 마을버스 이용',
+                    'Line 6 Bonghwasan Station, then walk or take local shuttle bus'
+                  )}
                 </p>
               </div>
             </div>
@@ -101,9 +122,14 @@ export default function DirectionsPage() {
                 <Bus className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-gray-900 mb-1">버스 이용 시</h3>
+                <h3 className="text-base font-bold text-gray-900 mb-1">
+                  {t('버스 이용 시', 'By Bus')}
+                </h3>
                 <p className="text-gray-700 leading-relaxed break-keep">
-                  신내동 영안교회 인근 정류장 하차 (간선/지선/마을버스 노선 운행)
+                  {t(
+                    '신내동 영안교회 인근 정류장 하차 (간선/지선/마을버스 노선 운행)',
+                    'Get off near Youngan Church in Shinnae-dong (Main/Branch/Town bus lines)'
+                  )}
                 </p>
               </div>
             </div>

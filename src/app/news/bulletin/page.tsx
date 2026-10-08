@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import { juboList2026, JuboItem } from '@/data/juboData';
-import { Calendar, Download, Eye, X, ChevronRight, BookOpen, Layers } from 'lucide-react';
+import { Calendar, Download, Eye, X, Layers } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function BulletinPage() {
+  const { t } = useLanguage();
   const [selectedJubo, setSelectedJubo] = useState<JuboItem | null>(null);
   const [selectedMonth, setSelectedMonth] = useState<number | 'all'>('all');
 
@@ -26,30 +28,36 @@ export default function BulletinPage() {
             Young An Weekly Bulletin
           </span>
           <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mt-3 mb-4">
-            온라인 주보
+            {t('온라인 주보', 'Online Bulletin')}
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            2026년도 주차별 예배 순서지와 목회 소식을 고화질로 확인하고 다운로드하실 수 있습니다.
+            {t(
+              '2026년도 주차별 예배 순서지와 목회 소식을 고화질로 확인하고 다운로드하실 수 있습니다.',
+              'View and download high-resolution weekly service bulletins and ministry news for 2026.'
+            )}
           </p>
         </div>
 
         {/* 이번 주 최신 주보 메인 카드 */}
         <div className="bg-gradient-to-br from-blue-900 to-indigo-950 rounded-3xl p-8 sm:p-10 mb-14 text-white shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-5 py-1.5 rounded-bl-2xl uppercase tracking-wider">
-            금주의 주보 (최신)
+            {t('금주의 주보 (최신)', 'This Week’s Bulletin (Latest)')}
           </div>
           
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="flex flex-col lg:row items-center justify-between gap-8">
             <div className="space-y-4 max-w-xl">
               <div className="flex items-center gap-2 text-blue-200 text-sm font-semibold">
                 <Calendar className="w-4 h-4" />
-                <span>{latestJubo.date} (제{latestJubo.weekNumber}주)</span>
+                <span>{latestJubo.date} ({t(`제${latestJubo.weekNumber}주`, `Week ${latestJubo.weekNumber}`)})</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-                {latestJubo.title}
+                {t(latestJubo.title, 'Youngan Presbyterian Church Weekly Bulletin')}
               </h2>
               <p className="text-blue-100/90 text-sm sm:text-base leading-relaxed">
-                주일예배 순서, 금주의 성경통독 안내, 교구별 목장 소식 및 교회 주요 공지사항이 수록되어 있습니다.
+                {t(
+                  '주일예배 순서, 금주의 성경통독 안내, 교구별 목장 소식 및 교회 주요 공지사항이 수록되어 있습니다.',
+                  'Includes Sunday worship order, weekly Bible reading guide, parish news, and major announcements.'
+                )}
               </p>
               
               <div className="pt-2 flex flex-wrap gap-3">
@@ -57,14 +65,14 @@ export default function BulletinPage() {
                   onClick={() => setSelectedJubo(latestJubo)}
                   className="px-6 py-3 bg-white text-blue-950 font-bold rounded-xl hover:bg-blue-50 transition shadow-md flex items-center gap-2 text-sm cursor-pointer"
                 >
-                  <Eye className="w-4 h-4 text-blue-600" /> 주보 원본 크게보기
+                  <Eye className="w-4 h-4 text-blue-600" /> {t('주보 원본 크게보기', 'View Full Bulletin')}
                 </button>
                 <a
                   href={latestJubo.imageUrl}
                   download={`영안교회_주보_${latestJubo.date}.jpg`}
                   className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition border border-white/20 flex items-center gap-2 text-sm cursor-pointer"
                 >
-                  <Download className="w-4 h-4" /> 고화질 저장
+                  <Download className="w-4 h-4" /> {t('고화질 저장', 'Download HD')}
                 </a>
               </div>
             </div>
@@ -80,7 +88,7 @@ export default function BulletinPage() {
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                클릭하여 확대
+                {t('클릭하여 확대', 'Click to enlarge')}
               </div>
             </div>
           </div>
@@ -91,7 +99,7 @@ export default function BulletinPage() {
           <div className="flex items-center justify-between mb-3 px-2">
             <span className="text-sm font-bold text-gray-700 flex items-center gap-2">
               <Layers className="w-4 h-4 text-blue-600" />
-              2026년 주차별 주보 목록 ({filteredJubos.length}건)
+              {t(`2026년 주차별 주보 목록 (${filteredJubos.length}건)`, `2026 Weekly Bulletins (${filteredJubos.length})`)}
             </span>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -103,7 +111,7 @@ export default function BulletinPage() {
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
-              전체 (1~10월)
+              {t('전체 (1~10월)', 'All (Jan~Oct)')}
             </button>
             {months.map((m) => (
               <button
@@ -115,7 +123,7 @@ export default function BulletinPage() {
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                {m}월
+                {t(`${m}월`, `Month ${m}`)}
               </button>
             ))}
           </div>
@@ -140,10 +148,10 @@ export default function BulletinPage() {
                   loading="lazy"
                 />
                 <div className="absolute top-2.5 left-2.5 bg-gray-900/80 backdrop-blur-xs text-white text-[11px] font-bold px-2 py-0.5 rounded-md">
-                  제{item.weekNumber}주
+                  {t(`제${item.weekNumber}주`, `Wk ${item.weekNumber}`)}
                 </div>
                 <div className="absolute inset-0 bg-blue-900/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                  <Eye className="w-4 h-4 mr-1" /> 자세히 보기
+                  <Eye className="w-4 h-4 mr-1" /> {t('자세히 보기', 'View')}
                 </div>
               </div>
 
@@ -161,13 +169,13 @@ export default function BulletinPage() {
                     onClick={() => setSelectedJubo(item)}
                     className="flex-1 py-1.5 text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition text-center cursor-pointer"
                   >
-                    주보 보기
+                    {t('주보 보기', 'View')}
                   </button>
                   <a
                     href={item.imageUrl}
                     download={`영안교회_주보_${item.date}.jpg`}
                     className="p-1.5 text-gray-500 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition shrink-0 cursor-pointer"
-                    title="이미지 다운로드"
+                    title={t('이미지 다운로드', 'Download Image')}
                   >
                     <Download className="w-3.5 h-3.5" />
                   </a>
@@ -185,7 +193,7 @@ export default function BulletinPage() {
               <div className="p-4 px-6 border-b border-gray-200 flex items-center justify-between bg-gray-50">
                 <div>
                   <h3 className="text-lg font-bold text-gray-900">{selectedJubo.title}</h3>
-                  <span className="text-xs text-gray-500">{selectedJubo.date} (제{selectedJubo.weekNumber}주차)</span>
+                  <span className="text-xs text-gray-500">{selectedJubo.date} ({t(`제${selectedJubo.weekNumber}주차`, `Week ${selectedJubo.weekNumber}`)})</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <a
@@ -193,7 +201,7 @@ export default function BulletinPage() {
                     download={`영안교회_주보_${selectedJubo.date}.jpg`}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition"
                   >
-                    <Download className="w-3.5 h-3.5" /> 다운로드
+                    <Download className="w-3.5 h-3.5" /> {t('다운로드', 'Download')}
                   </a>
                   <button
                     onClick={() => setSelectedJubo(null)}

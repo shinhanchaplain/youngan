@@ -1,8 +1,13 @@
+'use client';
+
 import React from 'react';
 import { visionCommittees } from '@/data/committeeData';
 import { CheckCircle2, User } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function CommitteePage() {
+  const { lang, t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-slate-50 pt-12 pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,14 +18,17 @@ export default function CommitteePage() {
             Vision Committees
           </span>
           <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mt-3 mb-4">
-            비전위원회 안내
+            {t('비전위원회 안내', 'Vision Committees Overview')}
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            영안장로교회는 담임목사님의 '균형목회' 비전을 실현하기 위해 <strong>8개의 전문 비전위원회</strong>를 구성하여 교회의 모든 사역을 은혜와 질서 가운데 감당하고 있습니다.
+            {t(
+              "영안장로교회는 담임목사님의 '균형목회' 비전을 실현하기 위해 8개의 전문 비전위원회를 구성하여 교회의 모든 사역을 은혜와 질서 가운데 감당하고 있습니다.",
+              "To realize the vision of 'Balanced Ministry', Youngan Presbyterian Church operates 8 specialized Vision Committees under the Session to serve all ministries with grace and order."
+            )}
           </p>
         </div>
 
-        {/* 8대 위원회 그리드 (각 위원회 사역 대표 사진 및 위원장 프로필 반영) */}
+        {/* 8대 위원회 그리드 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {visionCommittees.map((com, idx) => (
             <div 
@@ -32,23 +40,23 @@ export default function CommitteePage() {
                 <div className="relative h-48 w-full overflow-hidden bg-slate-900">
                   <img 
                     src={com.bannerImage} 
-                    alt={com.name} 
+                    alt={lang === 'en' ? com.nameEn : com.nameKo} 
                     className="w-full h-full object-cover opacity-85 hover:scale-105 transition duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                   
                   <div className="absolute top-4 left-4 flex items-center gap-2">
                     <span className="text-xs font-black px-3 py-1 bg-white/90 text-slate-900 rounded-lg backdrop-blur-xs">
-                      제 0{idx + 1} 위원회
+                      {lang === 'en' ? `No. 0${idx + 1} Committee` : `제 0${idx + 1} 위원회`}
                     </span>
                     <span className="text-xs text-white font-bold bg-slate-900/70 px-2.5 py-0.5 rounded-md backdrop-blur-xs">
-                      당회 산하 기구
+                      {t('당회 산하 기구', 'Under Session')}
                     </span>
                   </div>
 
                   <div className="absolute bottom-4 left-5 right-5 text-white">
                     <h3 className="text-2xl font-black drop-shadow-md">
-                      {com.name}
+                      {lang === 'en' ? com.nameEn : com.nameKo}
                     </h3>
                   </div>
                 </div>
@@ -56,20 +64,20 @@ export default function CommitteePage() {
                 {/* 본문 정보 */}
                 <div className="p-7">
                   <p className="text-sm font-bold text-slate-800 mb-3">
-                    {com.role}
+                    {lang === 'en' ? com.roleEn : com.roleKo}
                   </p>
                   <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                    {com.description}
+                    {lang === 'en' ? com.descriptionEn : com.descriptionKo}
                   </p>
 
                   {/* 주요 사역 과제 */}
                   <div className="bg-slate-50 rounded-2xl p-5 mb-2 border border-slate-100">
                     <h4 className="text-xs font-bold text-slate-700 mb-3 flex items-center gap-1.5">
                       <CheckCircle2 className="w-4 h-4 text-slate-700" />
-                      주요 담당 사역
+                      {t('주요 담당 사역', 'Key Ministry Tasks')}
                     </h4>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600">
-                      {com.tasks.map((task, tidx) => (
+                      {(lang === 'en' ? com.tasksEn : com.tasksKo).map((task, tidx) => (
                         <li key={tidx} className="flex items-start gap-1.5">
                           <span className="text-slate-400">•</span>
                           <span>{task}</span>
@@ -86,7 +94,7 @@ export default function CommitteePage() {
                   {com.leaderPhoto ? (
                     <img 
                       src={com.leaderPhoto} 
-                      alt={com.leader} 
+                      alt={lang === 'en' ? com.leaderEn : com.leaderKo} 
                       className="w-10 h-10 rounded-full object-cover border-2 border-slate-200 shadow-xs shrink-0"
                     />
                   ) : (
@@ -95,19 +103,23 @@ export default function CommitteePage() {
                     </div>
                   )}
                   <div>
-                    <span className="text-[11px] font-bold text-slate-400 block">위원장</span>
+                    <span className="text-[11px] font-bold text-slate-400 block">
+                      {t('위원장', 'Committee Chair')}
+                    </span>
                     <span className="font-extrabold text-slate-900 text-sm">
-                      {com.leader}
+                      {lang === 'en' ? com.leaderEn : com.leaderKo}
                     </span>
                   </div>
                 </div>
 
-                {com.subLeaders.length > 0 && (
-                  <div className="text-right text-slate-500">
-                    <span className="text-[11px] font-bold text-slate-400 block">담당 임원</span>
-                    <span className="font-medium text-slate-700">{com.subLeaders.join(', ')}</span>
-                  </div>
-                )}
+                <div className="text-right text-slate-500">
+                  <span className="text-[11px] font-bold text-slate-400 block">
+                    {t('담당 임원', 'Leadership Team')}
+                  </span>
+                  <span className="font-medium text-slate-700">
+                    {(lang === 'en' ? com.subLeadersEn : com.subLeadersKo).join(', ')}
+                  </span>
+                </div>
               </div>
 
             </div>

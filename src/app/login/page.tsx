@@ -66,15 +66,8 @@ export default function LoginPage() {
     <div className="min-h-screen bg-slate-50 py-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200 shadow-sm p-8 sm:p-10">
         
-        {/* 상단 교회 로고 및 타이틀 */}
+        {/* 상단 타이틀 */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-block mb-3">
-            <img 
-              src="http://www.youngan.or.kr/data/CHURCH_LOGO/CHURCH_LOGO_1433914471_m5.jpg" 
-              alt="영안장로교회" 
-              className="h-10 mx-auto object-contain"
-            />
-          </Link>
           <h2 className="text-2xl font-black text-slate-900">
             {mode === 'login' 
               ? t('성도 로그인', 'Member Sign In')
@@ -140,7 +133,7 @@ export default function LoginPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={t('홍길동', 'John Doe')}
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-slate-900"
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-black font-medium focus:outline-none focus:border-slate-900"
                   />
                 </div>
               </div>
@@ -157,7 +150,7 @@ export default function LoginPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="010-0000-0000"
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-slate-900"
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-black font-medium focus:outline-none focus:border-slate-900"
                   />
                 </div>
               </div>
@@ -173,7 +166,7 @@ export default function LoginPage() {
                     value={parish}
                     onChange={(e) => setParish(e.target.value)}
                     placeholder={t('예: 3교구 2목장', 'e.g. Parish 3')}
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-slate-900"
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-black font-medium focus:outline-none focus:border-slate-900"
                   />
                 </div>
               </div>
@@ -192,7 +185,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-slate-900"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-black font-medium focus:outline-none focus:border-slate-900"
               />
             </div>
           </div>
@@ -210,7 +203,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-slate-900"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-black font-medium focus:outline-none focus:border-slate-900"
               />
             </div>
             {mode === 'signup' && (

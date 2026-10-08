@@ -1,7 +1,12 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-slate-900 text-gray-300 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -17,7 +22,12 @@ export default function Footer() {
               <span><strong>E-mail:</strong> sys01@youngan.ne.kr</span>
             </div>
             <p className="text-gray-400">
-              Copyright © 1980 by <strong className="text-gray-200">영안장로교회</strong> (서울특별시 중랑구 신내로15길 179 · 담임 양병희 목사)
+              Copyright © 1980 by <strong className="text-gray-200">
+                {t('영안장로교회', 'Youngan Presbyterian Church')}
+              </strong> {t(
+                '(서울특별시 중랑구 신내로15길 179 · 담임 양병희 목사)',
+                '(179, Sinnae-ro 15-gil, Jungnang-gu, Seoul, Korea · Senior Pastor Byeong-hee Yang)'
+              )}
             </p>
           </div>
 
@@ -28,7 +38,7 @@ export default function Footer() {
                 href="https://www.youtube.com/channel/UC7dqZ-I9ZnUOhPMnkVD_bEQ" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                title="영안장로교회 공식 유튜브"
+                title="YouTube"
                 className="w-9 h-9 rounded-full bg-slate-800 hover:bg-red-600 text-gray-300 hover:text-white flex items-center justify-center transition shadow-xs"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -40,7 +50,7 @@ export default function Footer() {
                 href="http://www.youngan.or.kr/main/index.php?mode=blog" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                title="영안교회 블로그 / 나눔터"
+                title="Blog"
                 className="w-9 h-9 rounded-full bg-slate-800 hover:bg-emerald-600 text-gray-300 hover:text-white flex items-center justify-center transition shadow-xs text-xs font-black"
               >
                 B
@@ -50,7 +60,7 @@ export default function Footer() {
                 href="https://www.facebook.com/yapc1980" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                title="영안장로교회 페이스북"
+                title="Facebook"
                 className="w-9 h-9 rounded-full bg-slate-800 hover:bg-blue-600 text-gray-300 hover:text-white flex items-center justify-center transition shadow-xs"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -59,14 +69,12 @@ export default function Footer() {
               </a>
             </div>
 
-            <div className="flex items-center bg-white px-4 py-2 rounded-xl shadow-xs">
-              <Link href="/" className="inline-block">
-                <img
-                  src="/images/church_logo_hd.png"
-                  alt="영안장로교회"
-                  className="h-9 sm:h-10 w-auto object-contain"
-                />
-              </Link>
+            <div className="flex items-center pl-0 sm:pl-4 sm:border-l sm:border-slate-800">
+              <img 
+                src="http://www.youngan.or.kr/data/CHURCH_LOGO/CHURCH_LOGO_1433914471_m5.jpg" 
+                alt="영안장로교회" 
+                className="h-9 w-auto brightness-200 contrast-75 opacity-70"
+              />
             </div>
           </div>
 
