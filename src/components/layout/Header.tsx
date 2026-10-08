@@ -15,9 +15,9 @@ export default function Header() {
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center">
               <img 
-                src="http://www.youngan.or.kr/data/CHURCH_LOGO/CHURCH_LOGO_1433914471_m5.jpg" 
+                src="/images/church_logo_upscaled.png" 
                 alt="영안장로교회 로고" 
-                className="h-12 object-contain"
+                className="h-11 sm:h-12 w-auto object-contain"
               />
             </Link>
           </div>

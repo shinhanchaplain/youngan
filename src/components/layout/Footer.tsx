@@ -70,11 +70,13 @@ export default function Footer() {
             </div>
 
             <div className="flex items-center pl-0 sm:pl-4 sm:border-l sm:border-slate-800">
-              <img 
-                src="http://www.youngan.or.kr/data/CHURCH_LOGO/CHURCH_LOGO_1433914471_m5.jpg" 
-                alt="영안장로교회" 
-                className="h-9 w-auto brightness-200 contrast-75 opacity-70"
-              />
+              <div className="bg-white px-3 py-1.5 rounded-xl shadow-xs">
+                <img 
+                  src="/images/church_logo_upscaled.png" 
+                  alt="영안장로교회" 
+                  className="h-8 w-auto object-contain"
+                />
+              </div>
             </div>
           </div>
 
